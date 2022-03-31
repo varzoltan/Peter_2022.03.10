@@ -35,6 +35,24 @@ namespace Peter_2022._03._10
             }
             olvas.Close();
         }
+
+        static string konvertal(int second)//Függvény, ami visszaadja a másodperc értékét 00:00:00 formátumba.
+        {
+            int ora = second / 60 / 60;
+            int perc = (second / 60) - (ora * 60);
+            int masodperc = (second % 60);
+            return $"{ora.ToString("00")}:{perc.ToString("00")}:{masodperc.ToString("00")}";
+        }
+
+        static void triatlon_kiir()
+        {
+            StreamWriter ir = new StreamWriter("triatlon.ki");
+            foreach (var i in lista.OrderBy(x => x.osszesitett_ido))
+            {
+                ir.WriteLine($"{i.nev} {i.osszesitett_ido}");
+            }
+            ir.Close();
+        }
         static void Main(string[] args)//Main
         {
             //1.feladat
@@ -54,8 +72,15 @@ namespace Peter_2022._03._10
 
             //3.feladat
             Console.WriteLine("\n3.feladat");
-            Console.WriteLine($"{gyoztesek.ElementAt(0).nev}");
-            Console.WriteLine($"{1500.0/gyoztesek.ElementAt(0).uszasi_ido * 3,6}");
+            Console.WriteLine($"Győztes neve: {gyoztesek.ElementAt(0).nev}");
+            Console.WriteLine($"\tÁtlagsebessége úszásban: {(1500.0/gyoztesek.ElementAt(0).uszasi_ido * 3.6).ToString("0.00")} km/h");
+            Console.WriteLine($"\tÁtlagsebessége kerékpározásban: {(40000.0 / gyoztesek.ElementAt(0).kerkpar_ido * 3.6):N2} km/h");
+            Console.WriteLine($"\tÁtlagsebessége futásban: {(10000.0 / gyoztesek.ElementAt(0).futas_ido * 3.6):N2} km/h");
+
+            //4,5,6.feladat
+            Console.WriteLine("\n4.feladat");
+            triatlon_kiir();
+            Console.WriteLine("Kiírás kész, \"triatlon.ki\" fájl kiírása kész!");
             Console.ReadKey();
         }
     }
