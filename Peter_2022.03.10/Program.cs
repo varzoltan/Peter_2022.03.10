@@ -78,9 +78,20 @@ namespace Peter_2022._03._10
             Console.WriteLine($"\tÁtlagsebessége futásban: {(10000.0 / gyoztesek.ElementAt(0).futas_ido * 3.6):N2} km/h");
 
             //4,5,6.feladat
-            Console.WriteLine("\n4.feladat");
+            Console.WriteLine("\n4,5,6.feladat");
             triatlon_kiir();
             Console.WriteLine("Kiírás kész, \"triatlon.ki\" fájl kiírása kész!");
+
+            //7.feladat
+            Console.WriteLine("\n7.feladat\n\"reszer.ki\" fájl kiírva!");
+            StreamWriter ir = new StreamWriter("reszer.ki");
+            int gyoztes_uszo_index = lista.FindIndex(x => x.uszasi_ido == lista.Select(y => y.uszasi_ido).Min());
+            int gyoztes_kerekpar_index = lista.FindIndex(x => x.kerkpar_ido == lista.Select(y => y.kerkpar_ido).Min());
+            int gyoztes_futo_index = lista.FindIndex(x => x.futas_ido == lista.Select(y => y.futas_ido).Min());
+            ir.WriteLine($"{lista[gyoztes_uszo_index].nev}: {konvertal(lista[gyoztes_uszo_index].uszasi_ido)}");
+            ir.WriteLine($"{lista[gyoztes_kerekpar_index].nev}: {konvertal(lista[gyoztes_kerekpar_index].kerkpar_ido)}");
+            ir.WriteLine($"{lista[gyoztes_futo_index].nev}: {konvertal(lista[gyoztes_futo_index].futas_ido)}");
+            ir.Close();
             Console.ReadKey();
         }
     }
